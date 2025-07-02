@@ -7,5 +7,5 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
-    List<Notification> findPendingNotifications(LocalDateTime now, LocalDateTime future);
+    List<Notification> findByDateTimeBetweenAndNotifiedFalse(LocalDateTime start, LocalDateTime end);
 }
