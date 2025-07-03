@@ -76,11 +76,16 @@
 		</dependency>
 
 		<!-- AWS SNS -->
+		<!-- AWS SDK SNS v2 -->
 		<dependency>
-			<groupId>io.awspring.cloud</groupId>
-			<artifactId>spring-cloud-aws-starter-sns</artifactId>
-			<version>3.4.0</version>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>sns</artifactId>
 		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>io.awspring.cloud</groupId>-->
+<!--			<artifactId>spring-cloud-aws-starter-sns</artifactId>-->
+<!--			<version>3.4.0</version>-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>

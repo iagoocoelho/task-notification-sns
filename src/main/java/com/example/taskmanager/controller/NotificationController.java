@@ -1,23 +1,27 @@
 package com.example.taskmanager.controller;
 
 import com.example.taskmanager.domain.Notification;
+import com.example.taskmanager.domain.NotificationPublishMessage;
 import com.example.taskmanager.domain.NotificationRequest;
 import com.example.taskmanager.repository.NotificationRepository;
-import com.example.taskmanager.service.SNSAwsService;
-import lombok.RequiredArgsConstructor;
+import com.example.taskmanager.service.PushNotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/notification")
-@RequiredArgsConstructor
 public class NotificationController {
 
     @Autowired
     private NotificationRepository notificationRepository;
 
-    private final SNSAwsService snsAwsService;
+    private final PushNotificationService pushNotificationService;
+
+    public NotificationController(PushNotificationService service) {
+        this.pushNotificationService = service;
+    }
+
 
 
     @PostMapping
@@ -33,10 +37,10 @@ public class NotificationController {
         return ResponseEntity.ok("Notificação enviada com sucesso!");
     }
 
-
     @PostMapping("/sns")
-    public String sendNotification(@RequestBody String message) {
-        snsAwsService.publishMessage("my-topic", message);
-        return "Notification sent successfully!";
+    public String sendPushNotification(
+            @RequestBody NotificationPublishMessage notificationPublishMessage
+            ) {
+        return pushNotificationService.enviarPushParaDispositivo(notificationPublishMessage);
     }
 }
